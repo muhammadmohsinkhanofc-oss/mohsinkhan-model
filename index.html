@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Mohsin Khan — New Face</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --paper:#FAF7F2;
+    --ink:#241A2E;
+    --coral:#FF5A6E;
+    --plum:#2B1B3D;
+    --sun:#FFD23F;
+    --lime:#C7F464;
+    --line: rgba(36,26,46,0.14);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Bricolage Grotesque', sans-serif;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  .display{ font-family:'Anton', sans-serif; text-transform:uppercase; letter-spacing:0.01em; }
+  .hand{ font-family:'Caveat', cursive; }
+
+  a{color:inherit;}
+  :focus-visible{ outline:3px solid var(--coral); outline-offset:3px; }
+
+  /* ---------- background texture ---------- */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:2; opacity:0.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px clamp(20px,5vw,64px);
+    background:rgba(250,247,242,0.85); backdrop-filter:blur(8px);
+    border-bottom:1.5px solid var(--line);
+  }
+  .logo{ font-size:1.4rem; letter-spacing:0.04em; }
+  .logo span{ color:var(--coral); }
+  nav ul{ list-style:none; display:flex; gap:clamp(16px,3vw,36px); font-size:0.9rem; font-weight:600;}
+  nav a{ text-decoration:none; position:relative; padding-bottom:3px; }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--coral);
+    transition:width 0.25s ease;
+  }
+  nav a:hover::after, nav a:focus-visible::after{ width:100%; }
+  .navlinks{ display:flex; }
+  @media (max-width:640px){ .navlinks{ gap:14px; font-size:0.78rem; } }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:80px 20px 60px;
+    overflow:hidden;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--plum); color:var(--paper);
+    font-size:0.75rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+    padding:8px 16px; border-radius:100px; margin-bottom:28px;
+    transform:rotate(-2deg);
+    animation:pop 0.6s ease both;
+  }
+  .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--lime); }
+
+  .hero h1{
+    font-size:clamp(3.2rem, 11vw, 8.5rem);
+    line-height:0.88;
+    color:var(--plum);
+    animation:pop 0.7s ease both 0.08s;
+  }
+  .hero h1 .accent{ color:var(--coral); }
+
+  .hero p.sub{
+    max-width:520px; margin:26px auto 0;
+    font-size:clamp(1rem,2vw,1.2rem);
+    color:rgba(36,26,46,0.72);
+    animation:pop 0.7s ease both 0.16s;
+  }
+
+  .hero-cta{
+    margin-top:36px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
+    animation:pop 0.7s ease both 0.24s;
+  }
+  .btn{
+    display:inline-block; padding:14px 30px; border-radius:100px;
+    font-weight:700; font-size:0.95rem; text-decoration:none;
+    border:2px solid var(--plum); transition:transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+  .btn-solid{ background:var(--plum); color:var(--paper); }
+  .btn-solid:hover{ background:var(--coral); border-color:var(--coral); transform:translateY(-3px) rotate(-1deg); }
+  .btn-outline{ background:transparent; color:var(--plum); }
+  .btn-outline:hover{ background:var(--plum); color:var(--paper); transform:translateY(-3px) rotate(1deg); }
+
+  @keyframes pop{ from{ opacity:0; transform:translateY(18px);} to{ opacity:1; transform:translateY(0);} }
+
+  /* floating polaroids */
+  .polaroid{
+    position:absolute;
+    background:#fff; padding:10px 10px 34px; border-radius:3px;
+    box-shadow:0 14px 30px rgba(36,26,46,0.22);
+    width:150px;
+  }
+  .polaroid .ph{
+    aspect-ratio:1/1.1; border-radius:2px;
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,0.9); font-size:0.7rem; font-weight:700; text-align:center; padding:8px;
+    overflow:hidden;
+  }
+  .polaroid .ph img, .about-frame .ph img, .frame .ph img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .polaroid figcaption{
+    font-family:'Caveat',cursive; font-size:1.05rem; text-align:center; margin-top:8px; color:var(--ink);
+  }
+  .p1{ top:12%; left:5%; transform:rotate(-9deg); background-image:linear-gradient(160deg,var(--coral),var(--plum)); animation:float1 7s ease-in-out infinite, pop 0.8s ease both 0.3s; }
+  .p2{ top:18%; right:6%; transform:rotate(7deg); width:130px; animation:float2 8s ease-in-out infinite, pop 0.8s ease both 0.4s;}
+  .p3{ bottom:8%; left:11%; transform:rotate(6deg); width:120px; display:none; animation:float1 6.5s ease-in-out infinite, pop 0.8s ease both 0.5s;}
+  .p4{ bottom:6%; right:9%; transform:rotate(-6deg); animation:float2 7.5s ease-in-out infinite, pop 0.8s ease both 0.55s;}
+  .p1 .ph{ background:linear-gradient(160deg,var(--coral),var(--plum)); }
+  .p2 .ph{ background:linear-gradient(160deg,var(--sun),var(--coral)); }
+  .p3 .ph{ background:linear-gradient(160deg,var(--lime),#2B8A78); }
+  .p4 .ph{ background:linear-gradient(160deg,var(--plum),var(--coral)); }
+
+  @keyframes float1{ 0%,100%{ transform:translateY(0) rotate(-9deg);} 50%{ transform:translateY(-14px) rotate(-6deg);} }
+  @keyframes float2{ 0%,100%{ transform:translateY(0) rotate(7deg);} 50%{ transform:translateY(-16px) rotate(10deg);} }
+
+  @media (min-width:900px){ .p3{ display:block; } }
+  @media (max-width:820px){ .p1,.p2,.p4{ position:static; transform:none; width:110px; display:inline-block; margin:6px; animation:none;} .hero{padding-top:110px;} }
+
+  .scroll-cue{
+    margin-top:56px; font-size:0.75rem; letter-spacing:0.16em; text-transform:uppercase; font-weight:700;
+    color:rgba(36,26,46,0.5);
+    animation:bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
+
+  /* ---------- section shell ---------- */
+  section{ padding:110px clamp(20px,6vw,80px); position:relative; }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .kicker{
+    font-family:'Caveat',cursive; font-size:1.4rem; color:var(--coral); display:block; margin-bottom:4px;
+  }
+  .section-head h2{ font-size:clamp(2.2rem,5vw,3.6rem); color:var(--plum); line-height:1; }
+
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- about ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:60px; align-items:center; }
+  @media (max-width:800px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-copy p{ font-size:1.08rem; line-height:1.7; color:rgba(36,26,46,0.82); margin-bottom:18px; }
+  .badge-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+  .badge{
+    font-size:0.78rem; font-weight:700; padding:7px 14px; border-radius:100px;
+    border:1.5px solid var(--plum); color:var(--plum);
+  }
+  .about-frame{
+    background:var(--plum); border-radius:18px; padding:22px; transform:rotate(-2deg);
+    box-shadow:0 20px 40px rgba(43,27,61,0.25);
+  }
+  .about-frame .ph{
+    aspect-ratio:4/5; border-radius:10px; background:linear-gradient(150deg,var(--coral),#7C3F63);
+    display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; text-align:center; padding:20px;
+  }
+  .about-frame figcaption{ color:var(--paper); font-family:'Caveat',cursive; font-size:1.2rem; text-align:center; margin-top:14px; }
+
+  /* ---------- comp card / stats ---------- */
+  .compcard{
+    background:var(--plum); border-radius:24px; color:var(--paper); padding:clamp(28px,5vw,56px);
+    position:relative; overflow:hidden;
+  }
+  .compcard::before{
+    content:'NEW FACE'; position:absolute; top:-10px; right:-40px; font-family:'Anton',sans-serif;
+    font-size:9rem; color:rgba(255,255,255,0.04); letter-spacing:0.02em; pointer-events:none; line-height:1;
+  }
+  .compcard-top{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px; margin-bottom:36px; }
+  .compcard-top h3{ font-family:'Anton',sans-serif; font-size:clamp(1.8rem,4vw,2.6rem); letter-spacing:0.02em; }
+  .compcard-top span{ font-family:'Caveat',cursive; font-size:1.3rem; color:var(--lime); }
+  .stat-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:24px; position:relative; z-index:1; }
+  .stat{ border-top:2px solid rgba(255,255,255,0.18); padding-top:12px; }
+  .stat .num{ font-family:'Anton',sans-serif; font-size:1.9rem; color:var(--sun); display:block; }
+  .stat .label{ font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(250,247,242,0.65); }
+
+  /* ---------- gallery ---------- */
+  .contact-sheet{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:4px;
+    background:var(--ink); padding:4px; border-radius:14px;
+  }
+  .frame{
+    position:relative; aspect-ratio:3/4; overflow:hidden; cursor:pointer;
+  }
+  .frame .ph{
+    width:100%; height:100%; display:flex; align-items:flex-end; padding:14px;
+    color:rgba(255,255,255,0.92); font-weight:700; font-size:0.85rem;
+    transition:transform 0.5s ease;
+  }
+  .frame:hover .ph{ transform:scale(1.07); }
+  .frame .idx{
+    position:absolute; top:10px; left:10px; font-family:'Anton',sans-serif; font-size:0.75rem;
+    color:rgba(255,255,255,0.75); letter-spacing:0.05em;
+  }
+  .frame:nth-child(6n+1) .ph{ background:linear-gradient(155deg,var(--coral),var(--plum)); }
+  .frame:nth-child(6n+2) .ph{ background:linear-gradient(155deg,var(--sun),#B8443F); }
+  .frame:nth-child(6n+3) .ph{ background:linear-gradient(155deg,var(--lime),#2B8A78); }
+  .frame:nth-child(6n+4) .ph{ background:linear-gradient(155deg,var(--plum),#5D3B7A); }
+  .frame:nth-child(6n+5) .ph{ background:linear-gradient(155deg,#7C3F63,var(--coral)); }
+  .frame:nth-child(6n+6) .ph{ background:linear-gradient(155deg,#B8443F,var(--sun)); }
+
+  .gallery-note{
+    margin-top:18px; font-family:'Caveat',cursive; font-size:1.15rem; color:rgba(36,26,46,0.6);
+  }
+
+  /* ---------- contact ---------- */
+  .contact-wrap{
+    background:linear-gradient(155deg,var(--coral),#B8443F);
+    border-radius:28px; padding:clamp(40px,7vw,80px); text-align:center; color:var(--paper);
+    position:relative; overflow:hidden;
+  }
+  .contact-wrap h2{ font-size:clamp(2.4rem,6vw,4.2rem); line-height:0.95; margin-bottom:20px; }
+  .contact-wrap p{ font-size:1.1rem; max-width:480px; margin:0 auto 34px; opacity:0.95; }
+  .contact-links{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .contact-links a{
+    background:var(--paper); color:var(--plum); text-decoration:none; font-weight:700;
+    padding:14px 28px; border-radius:100px; transition:transform 0.2s ease;
+    display:inline-block;
+  }
+  .contact-links a:hover{ transform:translateY(-3px) rotate(-1deg); }
+
+  footer{
+    text-align:center; padding:36px 20px; font-size:0.8rem; color:rgba(36,26,46,0.55);
+  }
+  footer .hand{ font-size:1.1rem; color:var(--coral); }
+
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<nav>
+  <div class="logo">M<span>MK</span></div>
+  <ul class="navlinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#stats">Stats</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <figure class="polaroid p1"><div class="ph"><img src="images/M4.jpeg" alt="Mohsin, moody backlit portrait"></div><figcaption>test shoot</figcaption></figure>
+  <figure class="polaroid p2"><div class="ph"><img src="images/M2.jpeg" alt="Mohsin, rooftop natural light"></div><figcaption>golden hour</figcaption></figure>
+  <figure class="polaroid p3"><div class="ph"><img src="images/M6.jpeg" alt="Mohsin in a navy suit"></div><figcaption>studio</figcaption></figure>
+  <figure class="polaroid p4"><div class="ph"><img src="images/M5.jpeg" alt="Mohsin, street style portrait"></div><figcaption>street style</figcaption></figure>
+
+  <span class="eyebrow"><span class="dot"></span>New face on the scene</span>
+  <h1>MOHSIN<br><span class="accent">FRESH</span> OFF<br>THE REEL</h1>
+  <p class="sub">Karachi-based model, 6'2" and just getting started. New face, full portfolio, big energy — open to fashion, commercial, lifestyle &amp; editorial work.</p>
+  <div class="hero-cta">
+    <a href="#gallery" class="btn btn-solid">See the portfolio</a>
+    <a href="#contact" class="btn btn-outline">Book me</a>
+  </div>
+  <div class="scroll-cue">scroll ↓</div>
+</header>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-copy reveal">
+      <span class="kicker">the basics</span>
+      <h2 class="section-head" style="margin-bottom:24px;">Hi, I'm Mohsin.</h2>
+      <p>I am a fresh face model from Karachi, Pakistan, with a passion for fashion and creative expression. Standing at 188 cm (6'2"), I am committed to building a professional modeling career and continuously improving my posing, fitness, and on-camera presence.</p>
+      <p>I'm enthusiastic, adaptable, and eager to work with photographers, brands, and agencies to gain experience and grow in the industry.</p>
+      <div class="badge-row">
+        <span class="badge">Fashion</span>
+        <span class="badge">Commercial</span>
+        <span class="badge">Lifestyle</span>
+        <span class="badge">Editorial</span>
+        <span class="badge">English &amp; Urdu</span>
+      </div>
+    </div>
+    <figure class="about-frame reveal">
+      <div class="ph"><img src="images/M1.jpeg" alt="Mohsin headshot, white shirt and tie"></div>
+      <figcaption>fresh face, ready to work</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="section-head reveal">
+    <span class="kicker">the comp card</span>
+    <h2>Stats &amp; details</h2>
+  </div>
+  <div class="compcard reveal">
+    <div class="compcard-top">
+      <h3>Muhammad Mohsin Khan</h3>
+      <span>fresh face ✎</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><span class="num">188 cm</span><span class="label">Height (6'2")</span></div>
+      <div class="stat"><span class="num">Pakistani</span><span class="label">Nationality</span></div>
+      <div class="stat"><span class="num">Karachi</span><span class="label">Location</span></div>
+      <div class="stat"><span class="num">Black</span><span class="label">Hair</span></div>
+      <div class="stat"><span class="num">Dark Brown</span><span class="label">Eyes</span></div>
+      <div class="stat"><span class="num">EN / UR</span><span class="label">Languages</span></div>
+      <div class="stat"><span class="num">Fresh</span><span class="label">Experience</span></div>
+      <div class="stat"><span class="num">Fashion</span><span class="label">Category</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="section-head reveal">
+    <span class="kicker">the reel so far</span>
+    <h2>Contact sheet</h2>
+  </div>
+  <div class="contact-sheet reveal">
+    <div class="frame"><span class="idx">01</span><div class="ph"><img src="images/M6.jpeg" alt="Mohsin, suit and tie"></div></div>
+    <div class="frame"><span class="idx">02</span><div class="ph"><img src="images/M2.jpeg" alt="Mohsin, rooftop natural light"></div></div>
+    <div class="frame"><span class="idx">03</span><div class="ph"><img src="images/M5.jpeg" alt="Mohsin, street portrait"></div></div>
+    <div class="frame"><span class="idx">04</span><div class="ph"><img src="images/M3.jpeg" alt="Mohsin, close-up portrait"></div></div>
+    <div class="frame"><span class="idx">05</span><div class="ph"><img src="images/M4.jpeg" alt="Mohsin, editorial backlit portrait"></div></div>
+    <div class="frame"><span class="idx">06</span><div class="ph"><img src="images/M8.jpeg" alt="Mohsin, moody mirror portrait"></div></div>
+  </div>
+  <p class="gallery-note">more test shots coming soon — this reel grows with every shoot.</p>
+</section>
+
+<section id="contact">
+  <div class="contact-wrap reveal">
+    <h2>Let's<br>make something.</h2>
+    <p>New face, open calendar. If you're a photographer, stylist, or brand who wants to collaborate — reach out and let's plan a shoot.</p>
+    <div class="contact-links">
+      <a href="mailto:booking@mohsinkhan-portfolio.com">booking@mohsinkhan-portfolio.com</a>
+      <a href="#">@mohsin.model</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  built with a <span class="hand">little chaos</span> and a lot of ambition — © 2026 Muhammad Mohsin Khan
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{ threshold:0.15 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
